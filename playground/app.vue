@@ -13,6 +13,17 @@
 
     const channel = await usePeertubeChannel('part.of.the.problem', oauthStuff.access_token)
     console.log(channel)
+
+    const videoFromChannel = channel.recentVideos()
+    console.log(videoFromChannel[0])
+
+
+/* no worky
+    onMounted(async () => {
+      const embed = await usePeertubeEmbed(videoFromChannel[0].uuid)
+      console.log(embed)
+    })
+*/
   } catch (err) {
     console.error(err)
   }
