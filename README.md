@@ -9,6 +9,17 @@ Find and replace all on all files (CMD+SHIFT+F):
 
 # My Module
 
+## TODOs
+### Config
+- [ ] nuxt config `peertube` key
+- [ ] `serverUrl`
+### Composables
+- [ ] `usePeertubeClient()` - Login with user creds and store token in
+local storage
+- [ ] `usePeertubeChannel()` - Get a channel on the peertube
+- [ ] `usePeertubeVideo()` - Get a video on the peertube
+- [ ] `usePeertubeLive()` - Get a Live on the peertube
+
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
