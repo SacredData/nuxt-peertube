@@ -14,7 +14,7 @@ Find and replace all on all files (CMD+SHIFT+F):
 - [ ] nuxt config `peertube` key
 - [ ] `serverUrl`
 ### Composables
-- [ ] `usePeertubeClient()` - Login with user creds and store token in
+- [x] `usePeertubeClient()` - Login with user creds and store token in
 local storage
 - [ ] `usePeertubeChannel()` - Get a channel on the peertube
 - [ ] `usePeertubeVideo()` - Get a video on the peertube
