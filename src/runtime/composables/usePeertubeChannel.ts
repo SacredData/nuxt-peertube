@@ -1,5 +1,25 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from '#imports'
 
+class PeertubeChannel {
+  constructor(channel, videos={}) {
+    const { url, name, avatars, id, isLocal, displayName, updatedAt, ownerAccount } = channel
+    const { total, data } = videos
+    this.url = url
+    this.name = name
+    this.avatar = avatars[0]
+    this.id = id
+    this.isLocal = isLocal
+    this.displayName = displayName
+    this.updatedAt = updatedAt
+    this.ownerAccount = ownerAccount
+    this.totalVideos = total
+    this.videos = data
+  }
+  recentVideos(count=1) {
+    return this.videos.slice(0, count)
+  }
+}
+
 export const usePeertubeChannel = async (id, access_token) => {
   try {
     const nuxt = useNuxtApp()
@@ -17,7 +37,8 @@ export const usePeertubeChannel = async (id, access_token) => {
           'Authorization': `Bearer ${access_token}`
         }
     })
-    return { channel, videos }
+    return new PeertubeChannel(channel, videos)
+    //return { channel, videos }
   } catch (err) {
     console.error(err)
   }
