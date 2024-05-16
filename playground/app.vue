@@ -2,6 +2,7 @@
   <div>
     Nuxt module playground!
   </div>
+  <iframe />
 </template>
 
 <script setup>
@@ -14,16 +15,9 @@
     const channel = await usePeertubeChannel('part.of.the.problem', oauthStuff.access_token)
     console.log(channel)
 
-    const videoFromChannel = channel.recentVideos()
-    console.log(videoFromChannel[0])
+    const videoFromChannel = channel.recentVideos()[0]
+    document.querySelector('iframe').src=`https://gas.tube.sh/videos/embed/${videoFromChannel.uuid}?api=1`
 
-
-/* no worky
-    onMounted(async () => {
-      const embed = await usePeertubeEmbed(videoFromChannel[0].uuid)
-      console.log(embed)
-    })
-*/
   } catch (err) {
     console.error(err)
   }

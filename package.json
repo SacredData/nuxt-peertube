@@ -29,8 +29,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.11.2",
-    "@peertube/embed-api": "^0.0.7"
+    "@nuxt/kit": "^3.11.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.2.0",

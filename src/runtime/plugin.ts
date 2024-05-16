@@ -18,13 +18,8 @@ export default defineNuxtPlugin((_nuxtApp) => {
                         return localStorage.setItem(item, value)
                     }
                 }
-            }
+            },
         }
     }
 })
 
-
-/*
-export default defineNuxtPlugin((_nuxtApp) => {
-})
-*/
