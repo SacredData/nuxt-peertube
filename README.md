@@ -19,6 +19,8 @@ local storage
 - [ ] `usePeertubeChannel()` - Get a channel on the peertube
 - [ ] `usePeertubeVideo()` - Get a video on the peertube
 - [ ] `usePeertubeLive()` - Get a Live on the peertube
+- [ ] `usePeertubeEmbed()` - Grab embed of a video by its ID. Use peertube
+embed api to enable settings for the embed
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
