@@ -10,6 +10,9 @@
     const oauthStuff = await usePeertubeClient()
     $locally.setItem('access_token', oauthStuff.access_token)
     console.log($locally.getItem('access_token'), ' set access token in local storage ')
+
+    const channel = await usePeertubeChannel('part.of.the.problem', oauthStuff.access_token)
+    console.log(channel)
   } catch (err) {
     console.error(err)
   }

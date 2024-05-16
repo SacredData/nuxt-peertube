@@ -46,7 +46,6 @@ export const usePeertubeClient = async () => {
       token_type
     } = oauthReq
 
-
     return oauthReq
   } catch (err) {
     console.error(err)
