@@ -18,6 +18,9 @@
     const videoFromChannel = channel.recentVideos()[0]
     document.querySelector('iframe').src=`https://gas.tube.sh/videos/embed/${videoFromChannel.uuid}?api=1`
 
+
+    const vid = await usePeertubeVideo(videoFromChannel.id)
+    console.log(vid)
   } catch (err) {
     console.error(err)
   }
