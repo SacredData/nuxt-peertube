@@ -23,12 +23,20 @@
     $locally.setItem('access_token', oauthStuff.access_token)
     console.log($locally.getItem('access_token'), ' set access token in local storage ')
 
+    const history = await usePeertubeUserHistory(oauthStuff)
+    console.log(history, 'HISTORY')
+
     const channel = await usePeertubeChannel('part.of.the.problem', oauthStuff.access_token)
     console.log(channel)
 
     const videosFromChannel = channel.recentVideos(20)
     const videoFromChannel = videosFromChannel[11]
 
+
+    const searchTerm = 'war'
+
+    const searchResults = await usePeertubeSearch(searchTerm, 20)
+    console.log(searchResults)
 
     const vid = await usePeertubeVideo(videoFromChannel.id)
     console.log(vid)
