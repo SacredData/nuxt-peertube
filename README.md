@@ -35,6 +35,7 @@ that have the same use case.
 local storage
 - [x] `usePeertubeChannel()` - Get a channel on the peertube
 - [x] `usePeertubeVideo()` - Get a video on the peertube
+- [x] `usePeertubeSearch()` - Get search results from the peertube
 - [ ] `usePeertubeLive()` - Get a Live on the peertube
 
 [![npm version][npm-version-src]][npm-version-href]
