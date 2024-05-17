@@ -7,7 +7,7 @@ Find and replace all on all files (CMD+SHIFT+F):
 - Description: My new Nuxt module
 -->
 
-# My Module
+# `peertube-nuxt`
 
 ## TODOs
 ### Config
@@ -16,11 +16,9 @@ Find and replace all on all files (CMD+SHIFT+F):
 ### Composables
 - [x] `usePeertubeClient()` - Login with user creds and store token in
 local storage
-- [ ] `usePeertubeChannel()` - Get a channel on the peertube
-- [ ] `usePeertubeVideo()` - Get a video on the peertube
+- [x] `usePeertubeChannel()` - Get a channel on the peertube
+- [x] `usePeertubeVideo()` - Get a video on the peertube
 - [ ] `usePeertubeLive()` - Get a Live on the peertube
-- [ ] `usePeertubeEmbed()` - Grab embed of a video by its ID. Use peertube
-embed api to enable settings for the embed
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
