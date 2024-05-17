@@ -36,6 +36,8 @@ local storage
 - [x] `usePeertubeChannel()` - Get a channel on the peertube
 - [x] `usePeertubeVideo()` - Get a video on the peertube
 - [x] `usePeertubeSearch()` - Get search results from the peertube
+- [x] `usePeertubeUserHistory()` - Get user viewing history for the logged
+in user of the Peertube instance
 - [ ] `usePeertubeLive()` - Get a Live on the peertube
 
 [![npm version][npm-version-src]][npm-version-href]
