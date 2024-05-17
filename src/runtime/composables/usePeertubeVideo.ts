@@ -5,7 +5,6 @@ class PeertubeVideo {
     const {
       id,
       uuid,
-      shortUuid,
       embedPath,
       previewPath,
       thumbnailPath,
@@ -15,7 +14,6 @@ class PeertubeVideo {
 
     this.id = id
     this.uuid = uuid
-    this.shortUuid = shortUuid
     this.embedPath = embedPath
     this.previewPath = previewPath
     this.thumbnailPath = thumbnailPath
@@ -37,9 +35,8 @@ export const usePeertubeVideo = async (id, access_token='') => {
         'Authorization': `Bearer ${access_token}`
       }
     }
-    const video = await $fetch(`https://gas.tube.sh/api/v1/videos/${id}`, fetchOpts)
 
-    return new PeertubeVideo(video)
+    return new PeertubeVideo(await $fetch(`https://gas.tube.sh/api/v1/videos/${id}`, fetchOpts))
   } catch (err) {
     console.error(err)
   }
