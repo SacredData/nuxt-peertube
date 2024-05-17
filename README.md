@@ -8,6 +8,23 @@ Find and replace all on all files (CMD+SHIFT+F):
 -->
 
 # `peertube-nuxt`
+> A Nuxt module for interacting with a remote Peertube instance. Allows
+using Nuxt as a front-end to the Peertube instance API.
+
+## Status
+> Work-In-Progress
+
+Please do not use this module yet for anything important. We are learning
+Nuxt module development as we go and so our module should not be seen as
+reference implementation of anything.
+
+## Background
+This module is intended to provide convenient functionality for operating
+and interacting with a Peertube instance's API.
+
+We are taking work that we had to do for a client's web site, and
+generalizing it with this module, so that it can be applied to other sites
+that have the same use case.
 
 ## TODOs
 ### Config
