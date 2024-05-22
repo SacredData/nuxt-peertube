@@ -42,6 +42,9 @@
     const videosFromChannel = channel.recentVideos(20)
     const videoFromChannel = videosFromChannel[11]
 
+    const videoPodcast = await usePeertubeVideoPodcast(oauthStuff, 3)
+    const podcastText = await videoPodcast.text()
+    console.log(videoPodcast, podcastText, 'VIDPODCAST')
 
     // Perform a search on a peertube!
     const searchTerm = 'war'
