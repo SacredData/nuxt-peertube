@@ -40,6 +40,7 @@ local storage
 - [x] `usePeertubeSearch()` - Get search results from the peertube
 - [x] `usePeertubeUserHistory()` - Get user viewing history for the logged
 in user of the Peertube instance
+- [x] `usePeertubePodcastFeed()` - get feed for peertube channel
 - [ ] `usePeertubeLive()` - Get a Live on the peertube
 
 [![npm version][npm-version-src]][npm-version-href]
