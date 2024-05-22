@@ -47,6 +47,9 @@
     console.log(vid)
     srcRef.value = `https://gas.tube.sh${vid.embedPath}?api=1`
 
+    const playlist = await usePeertubePlaylist(2)
+    console.log(playlist)
+
     // Play a video!
     if (typeof window !== '') {
       console.log('WINDOW!!')

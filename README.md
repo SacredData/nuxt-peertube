@@ -31,6 +31,8 @@ that have the same use case.
 - [ ] nuxt config `peertube` key
 - [ ] `serverUrl`
 ### Composables
+- [x] `usePeertubeRegistration()` - Register user with the peertube
+instance
 - [x] `usePeertubeClient()` - Login with user creds and store token in
 local storage
 - [x] `usePeertubeChannel()` - Get a channel on the peertube
