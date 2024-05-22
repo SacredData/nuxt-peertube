@@ -31,6 +31,9 @@
     const myUser = await usePeertubeUserSettings(oauthStuff)
     console.log(myUser, 'MYUSER')
 
+    const myNotifs = await myUser.getNotifications()
+    console.log(myNotifs, 'MYNOTIFICATIONS')
+
     // Get a peertube channel!
     const channel = await usePeertubeChannel('part.of.the.problem', oauthStuff.access_token)
     console.log(channel)

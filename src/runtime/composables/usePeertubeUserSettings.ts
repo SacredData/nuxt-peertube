@@ -1,7 +1,9 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from '#imports'
 
 class UserSettings {
-  constructor (userData) {
+  constructor (userData, token) {
+    this.token = token
+
     const {
       autoPlayNextVideo,
       displayName,
@@ -41,6 +43,15 @@ class UserSettings {
     this.lastLoginDate = lastLoginDate
     this.twoFactorEnabled = twoFactorEnabled
   }
+  async getNotifications() {
+    const notifs = await $fetch('https://gas.tube.sh/api/v1/users/me/notifications', {
+      headers: {
+        'Authorization': `Bearer ${this.token}`
+      },
+      pick: ['total', 'data']
+    })
+    return notifs
+  }
 }
 
 export const usePeertubeUserSettings = async (client) => {
@@ -60,7 +71,7 @@ export const usePeertubeUserSettings = async (client) => {
       }
     )
 
-    const us = new UserSettings(myUserInfo)
+    const us = new UserSettings(myUserInfo, token)
     return us
   } catch (err) {
     console.error(err)
