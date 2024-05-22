@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-  import {PeerTubePlayer} from '@peertube/embed-api'
+  //import {PeerTubePlayer} from '@peertube/embed-api'
 
   const { $locally } = useNuxtApp()
   const srcRef = ref('')
@@ -27,6 +27,9 @@
     // Get user history of logged in user!
     const history = await usePeertubeUserHistory(oauthStuff)
     console.log(history, 'HISTORY')
+
+    const myUser = await usePeertubeUserSettings(oauthStuff)
+    console.log(myUser, 'MYUSER')
 
     // Get a peertube channel!
     const channel = await usePeertubeChannel('part.of.the.problem', oauthStuff.access_token)
@@ -51,12 +54,12 @@
     console.log(playlist)
 
     // Play a video!
-    if (typeof window !== '') {
+    /*if (typeof window !== '') {
       console.log('WINDOW!!')
 
       let player = new PeerTubePlayer(document.querySelector('iframe'))
       console.log(player)
-    }
+    }*/
 
   } catch (err) {
     console.error(err)

@@ -1,6 +1,6 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from '#imports'
 
-export const usePeertubeClient = async (email, user, name, password) => {
+export const usePeertubeRegistration = async (email, user, name, password) => {
   try {
     const nuxt = useNuxtApp()
     const config = import.meta.server ? useRuntimeConfig() : useRuntimeConfig().public
