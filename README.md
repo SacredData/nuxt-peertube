@@ -49,8 +49,10 @@ My new Nuxt module for doing amazing things.
 
 <!-- Highlight some of the features your module provide here -->
 - Composables for common Peertube user and admin functions 
-- Easily embed Peertube videos programmatically onto your page
+- Embed Peertube videos, playlists, and channels programmatically onto your page
 - Makes authentication into Peertube simple and painless
+- Acquire the user's watch history, following feeds, and user info
+- Search Peertube instance's videos, channels, and playlists
 
 ## Quick Setup
 
