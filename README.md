@@ -1,13 +1,4 @@
-<!--
-Get your module up and running quickly.
-
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
-
-# `peertube-nuxt`
+# `nuxt-peertube`
 > A Nuxt module for interacting with a remote Peertube instance. Allows
 using Nuxt as a front-end to the Peertube instance API.
 

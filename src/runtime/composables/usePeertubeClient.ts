@@ -5,6 +5,8 @@ export const usePeertubeClient = async () => {
     const nuxt = useNuxtApp()
     const config = import.meta.server ? useRuntimeConfig() : useRuntimeConfig().public
 
+    console.log('HERES THE CONFIG', nuxt.options)
+
     const { data: client, pending } = await useAsyncData('local-client', async () => {
       const { client_id, client_secret } = await $fetch('https://gas.tube.sh/api/v1/oauth-clients/local', {
         pick: ['client_id', 'client_secret'],

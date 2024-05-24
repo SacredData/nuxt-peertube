@@ -30,7 +30,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.11.2",
-    "@peertube/embed-api": "^0.0.7"
+    "@peertube/embed-api": "^0.0.7",
+    "defu": "^6.1.4"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.2.0",
