@@ -48,9 +48,9 @@ My new Nuxt module for doing amazing things.
 ## Features
 
 <!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+- Composables for common Peertube user and admin functions 
+- Easily embed Peertube videos programmatically onto your page
+- Makes authentication into Peertube simple and painless
 
 ## Quick Setup
 
