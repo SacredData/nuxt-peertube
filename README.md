@@ -32,6 +32,7 @@ local storage
 - [x] `usePeertubeUserHistory()` - Get user viewing history for the logged
 in user of the Peertube instance
 - [x] `usePeertubePodcastFeed()` - get feed for peertube channel
+- [x] `usePeertubeNotifications()` - get notifications for logged in user
 - [ ] `usePeertubeLive()` - Get a Live on the peertube
 
 [![npm version][npm-version-src]][npm-version-href]

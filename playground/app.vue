@@ -46,6 +46,9 @@
     const podcastText = await videoPodcast.text()
     console.log(videoPodcast, podcastText, 'VIDPODCAST')
 
+    const userNotifications = await usePeertubeNotifications(oauthStuff, 20)
+    console.log(userNotifications, 'notifications for user')
+
     // Perform a search on a peertube!
     const searchTerm = 'war'
     const searchResults = await usePeertubeSearch(searchTerm, 20)
