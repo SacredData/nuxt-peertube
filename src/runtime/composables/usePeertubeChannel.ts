@@ -24,21 +24,26 @@ export const usePeertubeChannel = async (id, access_token) => {
   try {
     const nuxt = useNuxtApp()
     const config = import.meta.server ? useRuntimeConfig() : useRuntimeConfig().public
-    const channel = await $fetch(`https://gas.tube.sh/api/v1/video-channels/${id}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${access_token}`
-        }
+    const { data: channelWithVideos, error, execute, pending, refresh, status } = await useAsyncData(`video-channel-${id}`, async () => {
+      const [channel, videos] = await Promise.all([
+        $fetch(`https://gas.tube.sh/api/v1/video-channels/${id}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${access_token}`
+            }
+        }),
+        $fetch(`https://gas.tube.sh/api/v1/video-channels/${id}/videos`, {
+          method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${access_token}`
+            }
+        })
+      ])
+      return { channel, videos }
     })
-
-    const videos = await $fetch(`https://gas.tube.sh/api/v1/video-channels/${id}/videos`, {
-      method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${access_token}`
-        }
-    })
+    const { channel, videos } = channelWithVideos.value
+    console.log(channel, videos)
     return new PeertubeChannel(channel, videos)
-    //return { channel, videos }
   } catch (err) {
     console.error(err)
   }
