@@ -42,7 +42,6 @@ export const usePeertubeChannel = async (id, access_token) => {
       return { channel, videos }
     })
     const { channel, videos } = channelWithVideos.value
-    console.log(channel, videos)
     return new PeertubeChannel(channel, videos)
   } catch (err) {
     console.error(err)
