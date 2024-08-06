@@ -29,13 +29,9 @@ export const usePeertubeClient = async () => {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
     })
-    const {
-      access_token,
-      expires_in,
-      refresh_token,
-      refresh_token_expires_in,
-      token_type
-    } = oauthReq
+    if (window !== undefined) {
+        localStorage.setItem('peertube', JSON.stringify(oauthReq))
+    }
     return oauthReq
   } catch (err) {
     console.error(err)
