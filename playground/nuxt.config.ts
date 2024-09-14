@@ -1,14 +1,14 @@
 export default defineNuxtConfig({
   ssr: false,
   app: {
-    baseURL: '/nuxt-peertube',
+    baseURL: "/nuxt-peertube",
   },
-  modules: ['../src/module'],
+  modules: ["../src/module"],
   myModule: {
-    serverUrl: 'https://gas.tube.sh'
+    serverUrl: "https://gas.tube.sh",
   },
   peertube: {
-    serverUrl: 'https://gas.tube.sh'
+    serverUrl: "https://gas.tube.sh",
   },
   devtools: { enabled: true },
-})
+});
