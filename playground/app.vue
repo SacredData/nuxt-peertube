@@ -14,8 +14,7 @@
 </template>
 
 <script setup>
-  //import {PeerTubePlayer} from '@peertube/embed-api'
-
+  import {PeerTubePlayer} from '@peertube/embed-api'
   const { $locally } = useNuxtApp()
   const srcRef = ref('')
   try {
@@ -40,7 +39,7 @@
 
     // Get a peertube channel's videos!
     const videosFromChannel = channel.recentVideos(20)
-    const videoFromChannel = videosFromChannel[11]
+    const videoFromChannel = videosFromChannel[1]
 
     const videoPodcast = await usePeertubeVideoPodcast(oauthStuff, 3)
     const podcastText = await videoPodcast.text()
@@ -57,21 +56,20 @@
     // Get a video!
     const vid = await usePeertubeVideo(videoFromChannel.id)
     console.log(vid)
-    srcRef.value = `https://gas.tube.sh${vid.embedPath}?api=1`
+    srcRef.value = `https://gas.tube.sh${vid.embedPath}?api=1&subtitle=en&autoplay=1&warningTitle=0&p2p=1&peertubeLink=0`
 
     const playlist = await usePeertubePlaylist(2)
     console.log(playlist)
 
-    // Play a video!
-    /*if (typeof window !== '') {
-      console.log('WINDOW!!')
-
-      let player = new PeerTubePlayer(document.querySelector('iframe'))
-      console.log(player)
-    }*/
+    onMounted(async () => {
+      const player = new PeerTubePlayer(document.querySelector('iframe'))
+      await vid.mountPlayer(player)
+      console.log('mounted player onto video', vid)
+    })
 
   } catch (err) {
     console.error(err)
   }
+
 
 </script>
