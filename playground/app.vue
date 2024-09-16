@@ -1,5 +1,6 @@
 <template>
   <div>
+  <div>
     Nuxt module playground!
   </div>
   <iframe
@@ -11,12 +12,54 @@
     marginwidth="0"
     allowfullscreen
  />
+    <div>
+  <button @click="login">
+    LOGIN
+  </button>
+    </div>
+    <h1>OAUTH</h1>
+    <p>
+      {{oauthRef}}
+    </p>
+    <h1>USER</h1>
+    <p>{{userRef}}</p>
+    <h1>NOTIFICATIONS</h1>
+    <p>{{notifRef}}</p>
+    <h1>HISTORY</h1>
+    <p>{{historyRef}}</p>
+  </div>
 </template>
 
 <script setup>
   import {PeerTubePlayer} from '@peertube/embed-api'
   const { $locally } = useNuxtApp()
   const srcRef = ref('')
+  const infoRef = ref('')
+  const oauthRef = ref('')
+  const historyRef = ref('')
+  const userRef = ref('')
+  const notifRef = ref('')
+
+  async function login() {
+    // Login!
+    const oauthStuff = await usePeertubeClient('producer', 'producer#1')
+    $locally.setItem('access_token', oauthStuff.access_token)
+    console.log($locally.getItem('access_token'), ' set access token in local storage ')
+
+    oauthRef.value = JSON.stringify(oauthStuff)
+    // Get user history of logged in user!
+    const history = await usePeertubeUserHistory(oauthStuff)
+    console.log(history, 'HISTORY')
+    historyRef.value = JSON.stringify(history)
+
+    const myUser = await usePeertubeUserSettings(oauthStuff)
+    console.log(myUser, 'MYUSER')
+    userRef.value = JSON.stringify(myUser)
+
+    const myNotifs = await myUser.getNotifications()
+    console.log(myNotifs, 'MYNOTIFICATIONS')
+    notifRef.value = JSON.stringify(myNotifs)
+  }
   try {
     // Login!
     /*const oauthStuff = await usePeertubeClient('producer', 'producer#1')
