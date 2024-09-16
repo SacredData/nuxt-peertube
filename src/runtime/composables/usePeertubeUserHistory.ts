@@ -3,6 +3,7 @@ import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
 export const usePeertubeUserHistory = async (client, count = 20) => {
   try {
     const nuxt = useNuxtApp();
+    const { peertube } = useRuntimeConfig().public;
     const config = import.meta.server
       ? useRuntimeConfig()
       : useRuntimeConfig().public;
@@ -11,7 +12,7 @@ export const usePeertubeUserHistory = async (client, count = 20) => {
     const token = client.access_token;
 
     return await $fetch(
-      `https://gas.tube.sh/api/v1/users/me/history/videos?count=${count || 20}`,
+      `${peertube.serverUrl}/api/v1/users/me/history/videos?count=${count || 20}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
