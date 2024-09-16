@@ -4,9 +4,9 @@ export default defineNuxtConfig({
     baseURL: "/nuxt-peertube",
   },
   modules: ["../src/module"],
-  myModule: {
+  /*myModule: {
     serverUrl: "https://gas.tube.sh",
-  },
+  },*/
   peertube: {
     serverUrl: "https://gas.tube.sh",
   },
