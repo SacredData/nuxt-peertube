@@ -1,13 +1,19 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
 
-export const usePeertubeClient = async (serverUrl = "") => {
+export const usePeertubeClient = async (alternateUrl) => {
   try {
     const nuxt = useNuxtApp();
-    console.log("hiaofa", useRuntimeConfig());
+    const { peertube } = useRuntimeConfig().public;
+    console.log(peertube);
     const config = import.meta.server
       ? useRuntimeConfig()
       : useRuntimeConfig().public;
+    console.log(useRuntimeConfig().public.peertube);
     console.log("HI FROM CLIENT", nuxt);
+    const serverUrl =
+      alternateUrl && alternateUrl instanceof String
+        ? alternateUrl
+        : peertube.serverUrl;
     const { data: client, pending } = await useAsyncData(
       "local-client",
       async () => {

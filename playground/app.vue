@@ -19,7 +19,7 @@
   const srcRef = ref('')
   try {
     // Login!
-    const oauthStuff = await usePeertubeClient('https://gas.tube.sh')
+    const oauthStuff = await usePeertubeClient()
     $locally.setItem('access_token', oauthStuff.access_token)
     console.log($locally.getItem('access_token'), ' set access token in local storage ')
 
