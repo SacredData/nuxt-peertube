@@ -34,6 +34,7 @@ class PeertubeVideo {
 export const usePeertubeVideo = async (id, access_token = "") => {
   try {
     const nuxt = useNuxtApp();
+    const { peertube } = useRuntimeConfig().public;
     const config = import.meta.server
       ? useRuntimeConfig()
       : useRuntimeConfig().public;
