@@ -58,7 +58,7 @@
     console.log(vid)
     srcRef.value = `https://gas.tube.sh${vid.embedPath}?api=1&subtitle=en&autoplay=1&warningTitle=0&p2p=1&peertubeLink=0`
 
-    const playlist = await usePeertubePlaylist(2)
+    const playlist = await usePeertubePlaylist(20, oauthStuff.access_token)
     console.log(playlist)
 
     onMounted(async () => {
