@@ -44,18 +44,18 @@ export const usePeertubeChannel = async (id, access_token) => {
       refresh,
       status,
     } = await useAsyncData(`video-channel-${id}`, async () => {
+      const headers =
+        access_token instanceof String
+          ? { Authorization: `Bearer ${access_token}` }
+          : {};
       const [channel, videos] = await Promise.all([
         $fetch(`${peertube.serverUrl}/api/v1/video-channels/${id}`, {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
+          headers,
         }),
         $fetch(`${peertube.serverUrl}/api/v1/video-channels/${id}/videos`, {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
+          headers,
         }),
       ]);
       return { channel, videos };

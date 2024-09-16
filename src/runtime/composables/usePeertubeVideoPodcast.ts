@@ -1,8 +1,8 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
 
 export const usePeertubeVideoPodcast = async (
-  client = { access_token: "" },
   id = null,
+  client = { access_token: "" },
 ) => {
   try {
     const nuxt = useNuxtApp();
