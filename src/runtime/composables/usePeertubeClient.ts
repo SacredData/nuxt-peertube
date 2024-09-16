@@ -1,15 +1,12 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
 
-export const usePeertubeClient = async (alternateUrl) => {
+export const usePeertubeClient = async (username, password, alternateUrl) => {
   try {
     const nuxt = useNuxtApp();
     const { peertube } = useRuntimeConfig().public;
-    console.log(peertube);
     const config = import.meta.server
       ? useRuntimeConfig()
       : useRuntimeConfig().public;
-    console.log(useRuntimeConfig().public.peertube);
-    console.log("HI FROM CLIENT", nuxt);
     const serverUrl =
       alternateUrl && alternateUrl instanceof String
         ? alternateUrl
@@ -33,8 +30,8 @@ export const usePeertubeClient = async (alternateUrl) => {
       client_id,
       client_secret,
       grant_type: "password",
-      username: "producer",
-      password: "producer#1",
+      username,
+      password,
     };
     const bodyContent = Object.keys(bodyData)
       .map(function (key) {
@@ -53,6 +50,9 @@ export const usePeertubeClient = async (alternateUrl) => {
     if (window !== undefined) {
       localStorage.setItem("peertube", JSON.stringify(oauthReq));
     }
+
+    const peertubeOauth = useState("peertube", () => oauthReq);
+    console.log(peertubeOauth);
     return oauthReq;
   } catch (err) {
     console.error(err);
