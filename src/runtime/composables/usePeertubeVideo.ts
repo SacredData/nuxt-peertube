@@ -1,5 +1,5 @@
 import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
-import { PeerTubePlayer } from "@peertube/embed-api";
+//import { PeerTubePlayer } from "@peertube/embed-api";
 
 class PeertubeVideo {
   constructor(video) {

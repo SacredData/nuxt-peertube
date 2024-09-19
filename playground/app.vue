@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-  import {PeerTubePlayer} from '@peertube/embed-api'
+  //import {PeerTubePlayer} from '@peertube/embed-api'
   const { $locally } = useNuxtApp()
   const srcRef = ref('')
   const infoRef = ref('')
@@ -106,9 +106,9 @@
     console.log(playlist)*/
 
     onMounted(async () => {
-      const player = new PeerTubePlayer(document.querySelector('iframe'))
-      await vid.mountPlayer(player)
-      console.log('mounted player onto video', vid)
+      //const player = new PeerTubePlayer(document.querySelector('iframe'))
+      //await vid.mountPlayer(player)
+      //console.log('mounted player onto video', vid)
     })
 
   } catch (err) {
