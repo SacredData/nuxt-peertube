@@ -1,6 +1,6 @@
 {
   "name": "nuxt-peertube",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Peertube composables for Nuxt3",
   "repository": "sacreddata/nuxt-peertube",
   "license": "MIT",
