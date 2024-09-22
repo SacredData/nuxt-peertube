@@ -26,6 +26,6 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public.peertube = options;
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addImportsDir(resolver.resolve("./runtime/composables"));
-    addPlugin(resolver.resolve("./runtime/plugin"));
+    //addPlugin(resolver.resolve("./runtime/plugin"));
   },
 });
