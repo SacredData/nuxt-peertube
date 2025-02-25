@@ -1,69 +1,40 @@
-import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type * as peertubeTypes from "@peertube/peertube-types";
+import { useNuxtApp, useRuntimeConfig } from "#imports";
 
 class UserSettings {
-  constructor(userData, token) {
-    this.token = token;
+  token: string;
+  userData: peertubeTypes.User;
 
-    const {
-      autoPlayNextVideo,
-      displayName,
-      displayNSFW,
-      email,
-      p2pEnabled,
-      videoLanguages,
-      videoHistoryEnabled,
-      id,
-      username,
-      emailPublic,
-      emailVerified,
-      blocked,
-      blockedReason,
-      createdAt,
-      specialPlaylists,
-      adminFlags,
-      lastLoginDate,
-      twoFactorEnabled,
-    } = userData;
-    this.autoPlayNextVideo = autoPlayNextVideo;
-    this.displayName = displayName;
-    this.displayNSFW = displayNSFW;
-    this.email = email;
-    this.p2pEnabled = p2pEnabled;
-    this.videoLanguages = videoLanguages;
-    this.videoHistoryEnabled = videoHistoryEnabled;
-    this.id = id;
-    this.username = username;
-    this.emailPublic = emailPublic;
-    this.emailVerified = emailVerified;
-    this.blocked = blocked;
-    this.blockedReason = blockedReason;
-    this.createdAt = createdAt;
-    this.specialPlaylists = specialPlaylists;
-    this.adminFlags = adminFlags;
-    this.lastLoginDate = lastLoginDate;
-    this.twoFactorEnabled = twoFactorEnabled;
+  constructor(userData: peertubeTypes.User, token: string) {
+    this.token = token;
+    this.userData = userData;
   }
-  async getNotifications() {
-    const notifs = await $fetch(
-      "https://gas.tube.sh/api/v1/users/me/notifications",
-      {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
+
+  async getNotifications(): Promise<any> {
+    try {
+      const notifs = await $fetch(
+        "https://gas.tube.sh/api/v1/users/me/notifications",
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+          pick: ["total", "data"],
         },
-        pick: ["total", "data"],
-      },
-    );
-    return notifs;
+      );
+      return notifs;
+    } catch (error) {
+      console.error("Failed to fetch notifications:", error);
+      throw error;
+    }
   }
 }
 
-export const usePeertubeUserSettings = async (client) => {
+export const usePeertubeUserSettings = async (client: {
+  access_token: string;
+}): Promise<UserSettings | null> => {
   try {
-    const nuxt = useNuxtApp();
     const { peertube } = useRuntimeConfig().public;
-    const config = import.meta.server
-      ? useRuntimeConfig()
-      : useRuntimeConfig().public;
 
     const token = client.access_token;
 
@@ -74,9 +45,11 @@ export const usePeertubeUserSettings = async (client) => {
       pick: ["data"],
     });
 
-    const us = new UserSettings(myUserInfo, token);
-    return us;
-  } catch (err) {
-    console.error(err);
+    const userData: peertubeTypes.User = myUserInfo.data;
+    const userSettings = new UserSettings(userData, token);
+    return userSettings;
+  } catch (error) {
+    console.error("Failed to fetch user settings:", error);
+    return null;
   }
 };

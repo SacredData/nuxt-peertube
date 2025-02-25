@@ -1,6 +1,24 @@
-import { useCookie, useNuxtApp, useRuntimeConfig } from "#imports";
+import { useNuxtApp, useRuntimeConfig, useState, useAsyncData } from "#imports";
 
-export const usePeertubeClient = async (username, password, alternateUrl) => {
+interface OAuthClient {
+  client_id: string;
+  client_secret: string;
+}
+
+interface OAuthResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token: string;
+  scope: string;
+  created_at: number;
+}
+
+export const usePeertubeClient = async (
+  username: string,
+  password: string,
+  alternateUrl?: string,
+): Promise<OAuthResponse | null> => {
   try {
     const nuxt = useNuxtApp();
     const { peertube } = useRuntimeConfig().public;
@@ -8,23 +26,30 @@ export const usePeertubeClient = async (username, password, alternateUrl) => {
       ? useRuntimeConfig()
       : useRuntimeConfig().public;
     const serverUrl =
-      alternateUrl && alternateUrl instanceof String
+      alternateUrl && typeof alternateUrl === "string"
         ? alternateUrl
         : peertube.serverUrl;
-    const { data: client, pending } = await useAsyncData(
-      "local-client",
-      async () => {
-        const { client_id, client_secret } = await $fetch(
-          `${serverUrl}/api/v1/oauth-clients/local`,
-          {
-            pick: ["client_id", "client_secret"],
-            immediate: true,
-            lazy: false,
-          },
-        );
-        return { client_id, client_secret };
-      },
-    );
+
+    const {
+      data: client,
+      pending,
+      error,
+    } = await useAsyncData<OAuthClient>("local-client", async () => {
+      const response = await $fetch<OAuthClient>(
+        `${serverUrl}/api/v1/oauth-clients/local`,
+        {
+          pick: ["client_id", "client_secret"],
+          immediate: true,
+          lazy: false,
+        },
+      );
+      return response;
+    });
+
+    if (error.value) {
+      throw new Error(`Failed to fetch OAuth client: ${error.value.message}`);
+    }
+
     const { client_id, client_secret } = client.value;
     const bodyData = {
       client_id,
@@ -33,28 +58,30 @@ export const usePeertubeClient = async (username, password, alternateUrl) => {
       username,
       password,
     };
-    const bodyContent = Object.keys(bodyData)
-      .map(function (key) {
-        return (
-          encodeURIComponent(key) + "=" + encodeURIComponent(bodyData[key])
-        );
-      })
-      .join("&");
-    const oauthReq = await $fetch(`https://gas.tube.sh/api/v1/users/token`, {
-      method: "POST",
-      body: bodyContent,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+
+    const bodyContent = new URLSearchParams(bodyData).toString();
+
+    const oauthReq = await $fetch<OAuthResponse>(
+      `${serverUrl}/api/v1/users/token`,
+      {
+        method: "POST",
+        body: bodyContent,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       },
-    });
-    if (window !== undefined) {
+    );
+
+    if (typeof window !== "undefined") {
       localStorage.setItem("peertube", JSON.stringify(oauthReq));
     }
 
-    const peertubeOauth = useState("peertube", () => oauthReq);
+    const peertubeOauth = useState<OAuthResponse>("peertube", () => oauthReq);
     console.log(peertubeOauth);
+
     return oauthReq;
   } catch (err) {
-    console.error(err);
+    console.error("Error in usePeertubeClient:", err);
+    return null;
   }
 };
